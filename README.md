@@ -28,7 +28,7 @@ pip install -r requirements.txt
 ## 3. Project Structure
 
 ```
-signal_classification/
+Harmonic_Analysis_and_Fault_Detection/
 ├── data/
 │   ├── raw/                # Raw input signal files (.txt)
 │   └── processed/          # Processed analysis results (.csv)
@@ -46,7 +46,7 @@ signal_classification/
 
 ```bash
 git clone https://github.com/fatememajdi/Harmonic_Analysis_and_Fault_Detection.git
-cd signal_classification
+cd Harmonic_Analysis_and_Fault_Detection
 ```
 
 2. Install required dependencies:

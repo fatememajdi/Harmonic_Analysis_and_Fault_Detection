@@ -2,10 +2,10 @@ import os
 import pandas as pd
 import numpy as np
 from preprocessing import load_signal_and_fs
-from harmonic_analysis import analyze_harmonics_and_possible_faults
+from harmonic_analysis import plot_signal_with_harmonics_and_faults
 
 
-def batch_analyze_folder(folder_path, output_folder, fault_freqs):
+def batch_analyze_folder(folder_path, output_folder, fault_freqs=[]):
     """
     Process multiple signal files in a folder, analyze harmonics and possible faults, 
     and save the results as CSV files.
@@ -47,16 +47,14 @@ def batch_analyze_folder(folder_path, output_folder, fault_freqs):
             print(f"Processing file: {filename}")
 
             signal, fs = load_signal_and_fs(filepath)
-
-            df = analyze_harmonics_and_possible_faults(signal, fs=fs, base_freq=16.5,
-                                                       num_harmonics=10,
-                                                       fault_freqs=fault_freqs,
-                                                       freq_tolerance_factor=8)
+            fault_freqs.append(("Elec", 99))
+            df = plot_signal_with_harmonics_and_faults(
+                signal, fs, [16.5, 33, 49.5, 66, 82.5, 99, 115.5], fault_freqs)
 
             print(df)
             output_csv = os.path.join(
                 output_folder, os.path.splitext(filename)[0] + '_analysis.csv')
-            df.to_csv(output_csv, index=False)
+            # df.to_csv(output_csv, index=False)
             output_files.append(output_csv)
 
     return output_files
